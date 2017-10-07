@@ -13,6 +13,7 @@ public class Deck {
 
     public Deck() {
         deck = generateDeck();
+        this.shuffle();
     }
 
     private ArrayList<Card> generateDeck() {
@@ -42,21 +43,25 @@ public class Deck {
 
     @Override
     public String toString() {
-        String out = "";
+        StringBuilder out = new StringBuilder();
         for (Card card : this.deck) {
-            out += card.toString() + "\n";
+            out.append(card.toString() + "\n");
         }
-        return out;
+        return out.toString();
     }
 
-    public ArrayList<Card> shuffle() {
+    public void setDeck(ArrayList<Card> deck) {
+        this.deck = deck;
+    }
+
+    public void shuffle() {
         ArrayList<Card> shuffleDeck = new ArrayList<>();
         for (int i = 0; i < DECK_SIZE; i++) {
             int randomInt = (int) (Math.random() * this.deck.size());
             shuffleDeck.add(deck.get(randomInt));
             deck.remove(randomInt);
         }
-        return shuffleDeck;
+        this.setDeck(shuffleDeck);
     }
 
     public ArrayList<Card> getDeck() {
@@ -65,7 +70,6 @@ public class Deck {
 
     public static void main(String[] args) {
         Deck deck = new Deck();
-        deck.deck = deck.shuffle();
         System.out.println(deck.toString());
     }
 }

@@ -15,4 +15,16 @@ public class Table {
         this.maxBid = maxBid;
 
     }
+
+    public void startGame() {
+
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
 }

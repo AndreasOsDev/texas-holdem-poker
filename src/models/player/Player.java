@@ -12,11 +12,11 @@ public class Player {
     ArrayList<Card> hand;
     Role role;
 
-    public Player(String name, int money, ArrayList<Card> hand, Role role) {
+    public Player(String name) {
         this.name = name;
-        this.money = money;
-        this.hand = hand;
-        this.role = role;
+        this.money = 2000;
+        this.hand = new ArrayList<>();
+        this.role = Role.PLAYER;
     }
 
     @Override
@@ -26,16 +26,6 @@ public class Player {
         return out;
     }
 
-    public static void main(String[] args) {
-        Deck deck = new Deck();
-        ArrayList<Card> hand = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            hand.add(deck.getDeck().remove(0));
-        }
-        Player player = new Player("Andreas", 4000, hand, Role.PLAYER);
-        System.out.println(player.printHand());
-        //System.out.println(player.toString());
-    }
 
     public String printName() {
         return getName();
@@ -87,5 +77,20 @@ public class Player {
 
     public Role getRole() {
         return role;
+    }
+
+    /**
+     * Public test class
+     * @param args | Input from program start
+     */
+    public static void main(String[] args) {
+        Deck deck = new Deck();
+        ArrayList<Card> hand = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            hand.add(deck.getDeck().remove(0));
+        }
+        Player player = new Player("Andreas");
+        System.out.println(player.printHand());
+        //System.out.println(player.toString());
     }
 }

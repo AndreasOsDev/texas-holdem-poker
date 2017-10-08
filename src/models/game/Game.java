@@ -6,10 +6,10 @@ import models.player.Player;
 import models.player.human.Human;
 import models.table.Table;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Game {
@@ -18,7 +18,9 @@ public class Game {
 
     }
     public void start() {
+        System.out.println("setting up game");
         setUpGame();
+        System.out.println("Setup finished");
         table.startGame();
     }
 
@@ -40,18 +42,17 @@ public class Game {
 
     private String findRandomName() {
         String randomName = null;
-        RandomAccessFile f = null;
-        long randomLocation = Long.parseLong(null);
+
         try {
-            f = new RandomAccessFile("../../resources/AiNames", "r");
-            randomLocation = (long) (Math.random() * f.length());
+            RandomAccessFile f = new RandomAccessFile("src\\resources\\AiNames", "r");
+            final long randomLocation = (long) (Math.random() * f.length());
             f.seek(randomLocation);
+            f.readLine();
             randomName = f.readLine();
-        f.readLine();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            randomName = "BOB!";
         }
         return randomName;
     }
